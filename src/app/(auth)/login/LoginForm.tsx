@@ -38,7 +38,7 @@ const LoginForm = () => {
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
         <h1 className="rounded p-1 text-center text-2xl font-bold text-primary">
           Login
         </h1>

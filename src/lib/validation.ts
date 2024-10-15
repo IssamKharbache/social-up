@@ -23,3 +23,7 @@ export const loginSchema = z.object({
 });
 /* login types */
 export type LoginValues = z.infer<typeof loginSchema>;
+
+export const createPostSchema = z.object({
+  content: requiredString("You can't create a post without content"),
+});

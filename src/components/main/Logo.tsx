@@ -9,11 +9,11 @@ interface Logo {
 }
 const Logo = ({ className }: Logo) => {
   const { theme } = useTheme();
-  if (theme === "dark" || theme === "system") {
+  if (theme === "light") {
     return (
       <div className="">
         <Image
-          src={lightLogo}
+          src={logo}
           alt=""
           className={`${className ? className : "w-40"}`}
         />
@@ -23,7 +23,7 @@ const Logo = ({ className }: Logo) => {
   return (
     <div className="">
       <Image
-        src={logo}
+        src={lightLogo}
         alt=""
         className={`${className ? className : "w-40"}`}
       />

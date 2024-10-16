@@ -21,6 +21,7 @@ const PostEditor = () => {
         placeholder: "What's on your mind?",
       }),
     ],
+    immediatelyRender: false,
   });
   const input =
     editor?.getText({

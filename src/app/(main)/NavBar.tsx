@@ -1,4 +1,5 @@
 import Logo from "@/components/main/Logo";
+import ThemeChanger from "@/components/main/ThemeChanger";
 import UserButton from "@/components/navbar/UserButton";
 import SearchBar from "@/components/SearchBar";
 
@@ -15,8 +16,13 @@ const NavBar = () => {
         </Link>
         {/* search bar */}
         <SearchBar />
-        {/* user button */}
-        <UserButton />
+
+        <div className="flex items-center gap-4">
+          {/* theme  */}
+          <ThemeChanger />
+          {/* user button */}
+          <UserButton />
+        </div>
       </div>
     </header>
   );

@@ -66,7 +66,7 @@ const WhoToFollow = async () => {
               </p>
             </div>
           </Link>
-          <Button>Follow</Button>
+          <Button className="rounded-full">Follow</Button>
         </div>
       ))}
     </div>
@@ -96,7 +96,7 @@ const TrendingTopics = async () => {
 
   return (
     <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm">
-      <div className="text-xl font-bold"># Trending hashtags</div>
+      <div className="text-xl font-bold">Trends for you</div>
       {trendingTopics.map(({ hashtag, count }) => {
         const title = hashtag.split("#")[1];
         return (

@@ -8,6 +8,7 @@ import kyInstance from "@/lib/ky";
 import { Loader2, ShieldAlertIcon } from "lucide-react";
 import { HashLoader } from "react-spinners";
 import InfiniteScrollContainer from "../posts/InfiniteScrollContainer";
+import DeletePostModal from "../modals/DeletePostModal";
 
 const ForYouPage = () => {
   const {

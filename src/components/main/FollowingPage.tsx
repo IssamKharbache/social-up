@@ -9,7 +9,7 @@ import { ShieldAlertIcon } from "lucide-react";
 import { HashLoader } from "react-spinners";
 import InfiniteScrollContainer from "../posts/InfiniteScrollContainer";
 
-const ForYouPage = () => {
+const FollowingPage = () => {
   const {
     data,
     fetchNextPage,
@@ -18,11 +18,11 @@ const ForYouPage = () => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["post-feed", "for-you"],
+    queryKey: ["post-feed", "following"],
     queryFn: ({ pageParam }) =>
       kyInstance
         .get(
-          "/api/posts/for-you",
+          "/api/posts/following",
           pageParam ? { searchParams: { cursor: pageParam } } : {},
         )
         .json<PostsPage>(),
@@ -53,7 +53,7 @@ const ForYouPage = () => {
     return (
       <div className="flex flex-col items-center justify-center gap-4 rounded-xl bg-red-400 p-3 text-center">
         <ShieldAlertIcon />
-        <p className="font-semibold">No one has posted anything yet</p>
+        <p className="font-semibold">Follow more people to see posts here !</p>
       </div>
     );
   }
@@ -72,4 +72,4 @@ const ForYouPage = () => {
   );
 };
 
-export default ForYouPage;
+export default FollowingPage;

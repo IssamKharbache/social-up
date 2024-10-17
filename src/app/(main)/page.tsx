@@ -1,17 +1,26 @@
+import FollowingPage from "@/components/main/FollowingPage";
 import ForYouPage from "@/components/main/ForYouPage";
-import Logo from "@/components/main/Logo";
 import PostEditor from "@/components/posts/editor/PostEditor";
-import Post from "@/components/posts/Post";
 import TrendsSideBar from "@/components/TrendsSideBar";
-import prisma from "@/lib/prisma";
-import { postDataInclude } from "@/lib/types";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default async function Home() {
   return (
     <div className="flex w-full min-w-0 gap-5">
       <div className="w-full min-w-0 space-y-5">
         <PostEditor />
-        <ForYouPage />
+        <Tabs defaultValue="for-you">
+          <TabsList>
+            <TabsTrigger value="for-you">For you</TabsTrigger>
+            <TabsTrigger value="following">Following</TabsTrigger>
+          </TabsList>
+          <TabsContent value="for-you">
+            <ForYouPage />
+          </TabsContent>
+          <TabsContent value="following">
+            <FollowingPage />
+          </TabsContent>
+        </Tabs>
       </div>
       <TrendsSideBar />
     </div>

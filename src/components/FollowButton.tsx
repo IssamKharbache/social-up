@@ -17,6 +17,7 @@ import { Check, X } from "lucide-react";
 const FollowButton = ({ userId, initialState }: FollowButtonProps) => {
   const { toast } = useToast();
   const { data } = useFollowerInfo(userId, initialState);
+
   const queryClient = useQueryClient();
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const queryKey: QueryKey = ["follower-info", userId];
@@ -34,6 +35,7 @@ const FollowButton = ({ userId, initialState }: FollowButtonProps) => {
         followers:
           (previousState?.followers || 0) +
           (previousState?.isFollowedByUser ? -1 : 1),
+        following: previousState?.following || 0,
         isFollowedByUser: !previousState?.isFollowedByUser,
       }));
       return { previousState };

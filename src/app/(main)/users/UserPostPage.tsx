@@ -2,14 +2,18 @@
 
 import { PostsPage } from "@/lib/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import PostsSkeleton from "../skeletons/PostsSkeleton";
-import Post from "../posts/Post";
+
 import kyInstance from "@/lib/ky";
 import { ShieldAlertIcon } from "lucide-react";
 import { HashLoader } from "react-spinners";
-import InfiniteScrollContainer from "../posts/InfiniteScrollContainer";
+import PostsSkeleton from "@/components/skeletons/PostsSkeleton";
+import InfiniteScrollContainer from "@/components/posts/InfiniteScrollContainer";
+import Post from "@/components/posts/Post";
 
-const ForYouPage = () => {
+interface UserPostsPageProps {
+  userId: string;
+}
+const UserPostPage = ({ userId }: UserPostsPageProps) => {
   const {
     data,
     fetchNextPage,
@@ -18,11 +22,11 @@ const ForYouPage = () => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["post-feed", "for-you"],
+    queryKey: ["post-feed", "user-posts", userId],
     queryFn: ({ pageParam }) =>
       kyInstance
         .get(
-          "/api/posts/for-you",
+          `/api/users/${userId}/posts`,
           pageParam ? { searchParams: { cursor: pageParam } } : {},
         )
         .json<PostsPage>(),
@@ -51,9 +55,11 @@ const ForYouPage = () => {
   }
   if (status === "success" && !posts.length && !hasNextPage) {
     return (
-      <div className="flex flex-col items-center justify-center gap-4 rounded-xl bg-red-400 p-3 text-center">
+      <div className="flex flex-col items-center justify-center gap-4 rounded-xl bg-card p-3 text-center">
         <ShieldAlertIcon />
-        <p className="font-semibold">No one has posted anything yet</p>
+        <p className="font-semibold">
+          This user hasn&apos;t posted anything yet .
+        </p>
       </div>
     );
   }
@@ -72,4 +78,4 @@ const ForYouPage = () => {
   );
 };
 
-export default ForYouPage;
+export default UserPostPage;

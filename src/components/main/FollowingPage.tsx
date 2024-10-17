@@ -34,11 +34,11 @@ const FollowingPage = () => {
 
   if (status === "pending") {
     return (
-      <>
+      <div className="space-y-5">
         {Array.from({ length: 5 }).map((_, i) => (
           <PostsSkeleton key={i} />
         ))}
-      </>
+      </div>
     );
   }
   if (status === "error") {

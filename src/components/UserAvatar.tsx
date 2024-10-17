@@ -1,32 +1,23 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { User2Icon } from "lucide-react";
+import avatar from "@/assets/avatar.png";
 interface UserAvatar {
   avatarUrl: string | null | undefined;
   size?: number;
   className?: string;
 }
 const UserAvatar = ({ avatarUrl, size, className }: UserAvatar) => {
-  if (avatarUrl) {
-    return (
+  return (
+    <div className={cn("h-fit rounded-full bg-secondary p-2", className)}>
       <Image
-        src={avatarUrl}
+        src={avatarUrl || avatar}
         alt="avatar"
-        width={size ?? 48}
-        height={size ?? 48}
-        className={cn(
-          "aspect-square h-fit flex-none rounded-full bg-secondary object-center",
-          className,
-        )}
+        width={size ?? 25}
+        height={size ?? 25}
+        className="flex-none object-center"
       />
-    );
-  } else {
-    return (
-      <div className="aspect-square h-fit flex-none rounded-full bg-secondary object-center p-2">
-        <User2Icon />
-      </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default UserAvatar;

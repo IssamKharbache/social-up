@@ -42,7 +42,7 @@ const UserButton = ({ className }: UserButtonProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className={cn("flex-none rounded-full", className)}>
-          <UserAvatar avatarUrl={user.avatarUrl} size={40} />
+          <UserAvatar avatarUrl={user.avatarUrl} size={20} />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -50,7 +50,7 @@ const UserButton = ({ className }: UserButtonProps) => {
         <DropdownMenuLabel>@{user.username}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {/* profile */}
-        <Link href={`/users/${user.id}`}>
+        <Link href={`/users/${user.username}`}>
           <DropdownMenuItem>
             <User2Icon className="mr-2 size-4" />
             Profile

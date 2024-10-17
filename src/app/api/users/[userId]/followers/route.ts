@@ -22,6 +22,7 @@ export const GET = async (
         _count: {
           select: {
             followers: true,
+            following: true,
           },
         },
       },
@@ -32,6 +33,7 @@ export const GET = async (
     const data: FollowerInfo = {
       followers: user._count.followers,
       isFollowedByUser: !!user.followers.length,
+      following: user._count.following,
     };
     return Response.json(data);
   } catch (error) {

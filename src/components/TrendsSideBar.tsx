@@ -74,6 +74,7 @@ const WhoToFollow = async () => {
             userId={user.id}
             initialState={{
               followers: user._count.followers,
+              following: user._count.following,
               isFollowedByUser: user.followers.some(
                 ({ followerId }) => followerId === user.id,
               ),

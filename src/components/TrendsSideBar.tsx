@@ -1,15 +1,14 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { userDataSelect } from "@/lib/types";
-import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
 import LoadingSkeletonFollowSugg from "./skeletons/LoadingSkeletonFollowSugg";
 import { Skeleton } from "./ui/skeleton";
 import Link from "next/link";
 import UserAvatar from "./UserAvatar";
-import { Button } from "./ui/button";
 import { unstable_cache } from "next/cache";
 import { formatNumber } from "@/lib/utils";
+import FollowButton from "./FollowButton";
+import { getUserDataSelect } from "@/lib/types";
 
 const TrendsSideBar = () => {
   return (
@@ -43,8 +42,13 @@ const WhoToFollow = async () => {
       NOT: {
         id: user.id,
       },
+      // followers: {
+      //   none: {
+      //     followerId: user.id,
+      //   },
+      // },
     },
-    select: userDataSelect,
+    select: getUserDataSelect(user.id),
     take: 5,
   });
   return (
@@ -66,9 +70,22 @@ const WhoToFollow = async () => {
               </p>
             </div>
           </Link>
-          <Button className="rounded-full">Follow</Button>
+          <FollowButton
+            userId={user.id}
+            initialState={{
+              followers: user._count.followers,
+              isFollowedByUser: user.followers.some(
+                ({ followerId }) => followerId === user.id,
+              ),
+            }}
+          />
         </div>
       ))}
+      {userToFollow && userToFollow.length === 0 && (
+        <div className="text-center text-muted-foreground">
+          You have no follow suggestions
+        </div>
+      )}
     </div>
   );
 };

@@ -45,7 +45,7 @@ const UserButton = ({ className }: UserButtonProps) => {
           <UserAvatar avatarUrl={user.avatarUrl} size={20} />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="p-4">
         {/* logged in user */}
         <DropdownMenuLabel>@{user.username}</DropdownMenuLabel>
         <DropdownMenuSeparator />

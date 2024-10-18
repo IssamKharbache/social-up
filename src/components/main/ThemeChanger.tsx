@@ -5,7 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Check, Monitor, MoonIcon, Sun, SunMoon } from "lucide-react";
+import { Check, MoonIcon, Sun, SunMoon } from "lucide-react";
 import { useTheme } from "next-themes";
 const ThemeChanger = () => {
   const { theme, setTheme } = useTheme();

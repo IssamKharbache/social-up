@@ -42,11 +42,11 @@ const WhoToFollow = async () => {
       NOT: {
         id: user.id,
       },
-      // followers: {
-      //   none: {
-      //     followerId: user.id,
-      //   },
-      // },
+      followers: {
+        none: {
+          followerId: user.id,
+        },
+      },
     },
     select: getUserDataSelect(user.id),
     take: 5,

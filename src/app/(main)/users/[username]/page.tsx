@@ -96,9 +96,16 @@ const UserProfile = async ({ user, loggedInUserId }: UserPofile) => {
       <div className="flex flex-wrap gap-3 sm:flex-nowrap">
         {/* user info  */}
         <div className="me-auto w-full space-y-3">
-          <div className="">
-            <h1 className="text-3xl font-bold">{user.displayName}</h1>
-            <div className="text-muted-foreground">@{user.username}</div>
+          <div className="flex items-center justify-between">
+            <div className="">
+              <h1 className="text-3xl font-bold">{user.displayName}</h1>
+              <div className="text-muted-foreground">@{user.username}</div>
+            </div>
+            {user.id === loggedInUserId ? (
+              <Button className="rounded-full">Edit Profile</Button>
+            ) : (
+              <FollowButton userId={user.id} initialState={followerInfo} />
+            )}
           </div>
           {/* member since */}
           <div className="flex gap-2 text-sm text-muted-foreground">
@@ -136,11 +143,6 @@ const UserProfile = async ({ user, loggedInUserId }: UserPofile) => {
             </div>
           </div>
         </div>
-        {user.id === loggedInUserId ? (
-          <Button className="rounded-full">Edit Profile</Button>
-        ) : (
-          <FollowButton userId={user.id} initialState={followerInfo} />
-        )}
       </div>
       {user.bio && (
         <>

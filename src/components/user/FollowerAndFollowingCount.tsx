@@ -15,7 +15,6 @@ const FollowerAndFollowingCount = ({
   typeOfFollow,
 }: FollowerAndFollowingCountProps) => {
   const { data } = useFollowerInfo(userId, initialState);
-  console.log(data.followers);
 
   return (
     <div className="flex items-center gap-1">

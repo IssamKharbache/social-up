@@ -2,11 +2,13 @@
 import { PostData } from "@/lib/types";
 import Link from "next/link";
 import UserAvatar from "../UserAvatar";
-import { formatRelativeDate } from "@/lib/utils";
+import { cn, formatRelativeDate } from "@/lib/utils";
 import { useSession } from "@/app/(main)/SessionProvider";
 import { PostMoreButton } from "./PostMoreButton";
 import Linkify from "../Linkify";
 import UserToolTip from "../UserToolTip";
+import { Media } from "@prisma/client";
+import Image from "next/image";
 
 interface PostProps {
   post: PostData;
@@ -58,8 +60,59 @@ const Post = ({ post }: PostProps) => {
       <Linkify>
         <div className="whitespace-pre-line break-words">{post.content}</div>
       </Linkify>
+      {!!post.attachments.length && (
+        <MediaPreviews attachment={post.attachments} />
+      )}
     </article>
   );
 };
 
 export default Post;
+
+interface MediaPreviewsProps {
+  attachment: Media[];
+}
+const MediaPreviews = ({ attachment }: MediaPreviewsProps) => {
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-3",
+        attachment.length > 1 && "sm:grid sm:grid-cols-2",
+      )}
+    >
+      {attachment.map((media) => (
+        <MediaPreview key={media.id} media={media} />
+      ))}
+    </div>
+  );
+};
+
+interface MediaPreviewProps {
+  media: Media;
+}
+
+const MediaPreview = ({ media }: MediaPreviewProps) => {
+  if (media.type === "IMAGE") {
+    return (
+      <Image
+        src={media.url}
+        alt="media"
+        width={500}
+        height={500}
+        className="mx-auto size-fit h-80 max-h-[30rem] w-80 rounded-xl object-cover"
+      />
+    );
+  }
+  if (media.type === "VIDEO") {
+    return (
+      <div className="">
+        <video
+          src={media.url}
+          controls
+          className="mx-auto size-fit max-h-[30rem] rounded-xl"
+        />
+      </div>
+    );
+  }
+  return <div className="text-destructive">Unsuppored media type file</div>;
+};

@@ -26,6 +26,7 @@ export type LoginValues = z.infer<typeof loginSchema>;
 
 export const createPostSchema = z.object({
   content: requiredString("You can't create a post without content"),
+  mediaIds: z.array(z.string()).max(5, "You can't add more than 5 attachment"),
 });
 
 export const updateUserProfileSchema = z.object({

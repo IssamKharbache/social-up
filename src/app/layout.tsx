@@ -5,7 +5,9 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
 import ReactQueryProvider from "./ReactQueryProvider";
 import NextTopLoader from "nextjs-toploader";
-
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { fileRouter } from "./api/uploadthing/core";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -33,10 +35,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistSans.className} ${geistMono.variable}`}
       >
+        <NextSSRPlugin routerConfig={extractRouterConfig(fileRouter)} />
         <ReactQueryProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >

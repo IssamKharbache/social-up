@@ -8,13 +8,18 @@ interface UserAvatar {
 }
 const UserAvatar = ({ avatarUrl, size, className }: UserAvatar) => {
   return (
-    <div className={cn("h-fit rounded-full bg-secondary p-2", className)}>
+    <div
+      className={cn(
+        `h-fit rounded-full bg-secondary ${!avatarUrl && "p-2"} `,
+        className,
+      )}
+    >
       <Image
         src={avatarUrl || avatar}
         alt="avatar"
         width={size ?? 25}
         height={size ?? 25}
-        className="flex-none object-center"
+        className={`h-full w-full flex-none object-cover ${avatarUrl ? "rounded-full" : ""} `}
       />
     </div>
   );

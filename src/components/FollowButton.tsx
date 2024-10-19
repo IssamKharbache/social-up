@@ -7,6 +7,7 @@ import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query";
 interface FollowButtonProps {
   userId: string;
   initialState: FollowerInfo;
+  currentUserId: string; // ID of the currently logged-in user
 }
 
 import React, { useState } from "react";
@@ -14,7 +15,11 @@ import { Button } from "./ui/button";
 import kyInstance from "@/lib/ky";
 import { Check, X } from "lucide-react";
 
-const FollowButton = ({ userId, initialState }: FollowButtonProps) => {
+const FollowButton = ({
+  userId,
+  initialState,
+  currentUserId,
+}: FollowButtonProps) => {
   const { toast } = useToast();
   const { data } = useFollowerInfo(userId, initialState);
 
@@ -38,6 +43,22 @@ const FollowButton = ({ userId, initialState }: FollowButtonProps) => {
         following: previousState?.following || 0,
         isFollowedByUser: !previousState?.isFollowedByUser,
       }));
+      // If the current user is the one performing the action, update their profile too
+      if (userId !== currentUserId) {
+        const currentUserKey: QueryKey = ["follower-info", currentUserId];
+        const currentUserData =
+          queryClient.getQueryData<FollowerInfo>(currentUserKey);
+
+        if (currentUserData) {
+          queryClient.setQueryData<FollowerInfo>(currentUserKey, () => ({
+            followers: currentUserData.followers,
+            following:
+              currentUserData.following +
+              (previousState?.isFollowedByUser ? -1 : 1), // Update following count
+            isFollowedByUser: !previousState?.isFollowedByUser,
+          }));
+        }
+      }
       return { previousState };
     },
     onError: (error, variable, context) => {

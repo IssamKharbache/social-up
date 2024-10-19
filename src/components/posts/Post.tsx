@@ -23,7 +23,7 @@ const Post = ({ post }: PostProps) => {
             <Link href={`/users/${post.user.username}`}>
               <UserAvatar
                 avatarUrl={post.user.avatarUrl}
-                className="h-10 w-10"
+                className={`h-10 w-10`}
               />
             </Link>
           </UserToolTip>

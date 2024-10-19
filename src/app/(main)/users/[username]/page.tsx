@@ -14,6 +14,7 @@ import { notFound } from "next/navigation";
 import { cache, use } from "react";
 import UserPostPage from "../UserPostPage";
 import Linkify from "@/components/Linkify";
+import EditProfileButton from "./EditProfileButton";
 
 interface UserPageProps {
   params: { username: string };
@@ -92,7 +93,7 @@ const UserProfile = async ({ user, loggedInUserId }: UserPofile) => {
       <UserAvatar
         avatarUrl={user.avatarUrl}
         size={250}
-        className="mx-auto size-full max-h-60 max-w-60 rounded-full p-8"
+        className={`mx-auto size-full max-h-60 max-w-60 rounded-full ${user.avatarUrl ? "p-0" : "p-8"}`}
       />
       <div className="flex flex-wrap gap-3 sm:flex-nowrap">
         {/* user info  */}
@@ -103,9 +104,13 @@ const UserProfile = async ({ user, loggedInUserId }: UserPofile) => {
               <div className="text-muted-foreground">@{user.username}</div>
             </div>
             {user.id === loggedInUserId ? (
-              <Button className="rounded-full">Edit Profile</Button>
+              <EditProfileButton user={user} />
             ) : (
-              <FollowButton userId={user.id} initialState={followerInfo} />
+              <FollowButton
+                userId={user.id}
+                initialState={followerInfo}
+                currentUserId={loggedInUserId}
+              />
             )}
           </div>
           {/* member since */}

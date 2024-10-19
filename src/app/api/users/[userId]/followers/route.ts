@@ -19,6 +19,10 @@ export const GET = async (
           where: { followerId: loggedInUser.id },
           select: { followerId: true },
         },
+        following: {
+          where: { followingId: loggedInUser.id },
+          select: { followingId: true },
+        },
         _count: {
           select: {
             followers: true,

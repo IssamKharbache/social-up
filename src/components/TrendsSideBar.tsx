@@ -18,11 +18,9 @@ const TrendsSideBar = () => {
         fallback={
           <>
             <Skeleton className="h-7 w-full rounded" />
-            <LoadingSkeletonFollowSugg />
-            <LoadingSkeletonFollowSugg />
-            <LoadingSkeletonFollowSugg />
-            <LoadingSkeletonFollowSugg />
-            <LoadingSkeletonFollowSugg />
+            {Array.from({ length: 3 }).map((_, i) => (
+              <LoadingSkeletonFollowSugg key={i} />
+            ))}
           </>
         }
       >
@@ -36,25 +34,25 @@ const TrendsSideBar = () => {
 export default TrendsSideBar;
 
 const WhoToFollow = async () => {
-  const { user } = await validateRequest();
-  if (!user) return null;
+  const { user: loggedInUser } = await validateRequest();
+  if (!loggedInUser) return null;
   const userToFollow = await prisma.user.findMany({
     where: {
       NOT: {
-        id: user.id,
+        id: loggedInUser.id,
       },
       followers: {
         none: {
-          followerId: user.id,
+          followerId: loggedInUser.id,
         },
       },
     },
-    select: getUserDataSelect(user.id),
+    select: getUserDataSelect(loggedInUser.id),
     take: 5,
   });
   return (
     <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm">
-      <div className="text-xl font-bold">Follow suggestions</div>
+      <div className="text-xl font-bold">You might like</div>
       {userToFollow.map((user) => (
         <div className="flex items-center justify-between" key={user.id}>
           <UserToolTip user={user}>
@@ -62,7 +60,7 @@ const WhoToFollow = async () => {
               href={`/users/${user.username}`}
               className="flex items-center gap-3"
             >
-              <UserAvatar avatarUrl={user.avatarUrl} />
+              <UserAvatar avatarUrl={user.avatarUrl} className={`h-10 w-10`} />
               <div className="">
                 <p className="line-clamp-1 break-all font-semibold hover:underline">
                   {user.displayName}
@@ -74,6 +72,7 @@ const WhoToFollow = async () => {
             </Link>
           </UserToolTip>
           <FollowButton
+            currentUserId={loggedInUser.id}
             userId={user.id}
             initialState={{
               followers: user._count.followers,

@@ -27,3 +27,10 @@ export type LoginValues = z.infer<typeof loginSchema>;
 export const createPostSchema = z.object({
   content: requiredString("You can't create a post without content"),
 });
+
+export const updateUserProfileSchema = z.object({
+  displayName: requiredString("Display name is required"),
+  bio: z.string().max(1000, "Bio is too long"),
+});
+
+export type UpdateUserProfileValues = z.infer<typeof updateUserProfileSchema>;

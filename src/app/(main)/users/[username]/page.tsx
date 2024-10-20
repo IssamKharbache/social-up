@@ -1,7 +1,6 @@
 import { validateRequest } from "@/auth";
 import FollowButton from "@/components/FollowButton";
 import TrendsSideBar from "@/components/TrendsSideBar";
-import { Button } from "@/components/ui/button";
 import FollowerAndFollowingCount from "@/components/user/FollowerAndFollowingCount";
 import UserAvatar from "@/components/UserAvatar";
 import prisma from "@/lib/prisma";
@@ -11,7 +10,7 @@ import { formatDate } from "date-fns";
 import { Calendar, ShieldAlertIcon } from "lucide-react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { cache, use } from "react";
+import { cache } from "react";
 import UserPostPage from "../UserPostPage";
 import Linkify from "@/components/Linkify";
 import EditProfileButton from "./EditProfileButton";

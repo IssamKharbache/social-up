@@ -41,7 +41,7 @@ const Post = ({ post }: PostProps) => {
             </UserToolTip>
 
             {/* date */}
-            <Link href={`/posts/${post.id}`}>
+            <Link href={`/posts/${post.id}`} suppressHydrationWarning>
               <p className="text-[11px] text-muted-foreground hover:underline">
                 {formatRelativeDate(post.createdAt)}
               </p>
@@ -94,13 +94,15 @@ interface MediaPreviewProps {
 const MediaPreview = ({ media }: MediaPreviewProps) => {
   if (media.type === "IMAGE") {
     return (
-      <Image
-        src={media.url}
-        alt="media"
-        width={500}
-        height={500}
-        className="mx-auto size-fit h-80 max-h-[30rem] w-80 rounded-xl object-cover"
-      />
+      <Link href={`/posts/${media.postId}`}>
+        <Image
+          src={media.url}
+          alt="media"
+          width={500}
+          height={500}
+          className="mx-auto size-fit h-80 max-h-[30rem] w-80 rounded-xl object-cover"
+        />
+      </Link>
     );
   }
   if (media.type === "VIDEO") {

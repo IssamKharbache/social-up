@@ -38,7 +38,8 @@ const DeletePostModal = ({ post, open, onClose }: DeletePostModalProps) => {
           <Button
             disabled={mutation.isPending}
             onClick={onClose}
-            variant="outline"
+            variant="secondary"
+            className="rounded-full"
           >
             Cancel
           </Button>
@@ -46,6 +47,7 @@ const DeletePostModal = ({ post, open, onClose }: DeletePostModalProps) => {
             loading={mutation.isPending}
             variant="destructive"
             onClick={() => mutation.mutate(post.id, { onSuccess: onClose })}
+            className="rounded-full"
           >
             Delete
           </LoadingButton>

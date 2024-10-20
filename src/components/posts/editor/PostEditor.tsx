@@ -10,10 +10,11 @@ import "./styles.css";
 import { useSubmitPostMutation } from "./mutations";
 import LoadingButton from "@/components/main/LoadingButton";
 import { Attachment, useMediaUpload } from "../useMediaUpload";
-import { useRef } from "react";
+import { ClipboardEvent, useRef } from "react";
 import { ImagePlusIcon, Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { useDropzone } from "@uploadthing/react";
 
 const PostEditor = () => {
   const { user } = useSession();
@@ -26,6 +27,10 @@ const PostEditor = () => {
     reset: resetMediaUpload,
     isUploading,
   } = useMediaUpload();
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop: startUpload,
+  });
+  const { onClick, ...rootProps } = getRootProps();
   //configure the editor
   const editor = useEditor({
     extensions: [
@@ -60,14 +65,27 @@ const PostEditor = () => {
       },
     );
   };
+  const pasteFiles = (e: ClipboardEvent<HTMLInputElement>) => {
+    const files = Array.from(e.clipboardData.items)
+      .filter((item) => item.kind === "file")
+      .map((item) => item.getAsFile()) as File[];
+    startUpload(files);
+  };
   return (
     <div className="flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm">
       <div className="flex gap-5">
         <UserAvatar avatarUrl={user?.avatarUrl} className="hidden sm:inline" />
-        <EditorContent
-          editor={editor}
-          className="max-h-[20rem] min-h-[4rem] w-full overflow-y-auto rounded-xl bg-background px-5 py-3 outline-none"
-        />
+        <div {...rootProps} className="w-full">
+          <EditorContent
+            editor={editor}
+            className={cn(
+              "max-h-[20rem] min-h-[4rem] w-full overflow-y-auto rounded-xl bg-background px-5 py-3",
+              isDragActive && "outline-dashed outline-primary",
+            )}
+            onPaste={pasteFiles}
+          />
+          <input {...getInputProps()} />
+        </div>
       </div>
       {/* file upload */}
       {!!attachments.length && (

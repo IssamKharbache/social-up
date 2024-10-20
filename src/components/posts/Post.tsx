@@ -10,6 +10,7 @@ import UserToolTip from "../UserToolTip";
 import { Media } from "@prisma/client";
 import Image from "next/image";
 import LikeButton from "./LikeButton";
+import BookMarkButton from "../BookMarkButton";
 
 interface PostProps {
   post: PostData;
@@ -65,13 +66,23 @@ const Post = ({ post }: PostProps) => {
         <MediaPreviews attachment={post.attachments} />
       )}
       <hr className="text-muted-foreground" />
-      <LikeButton
-        postId={post.id}
-        initialState={{
-          likes: post._count.likes,
-          isLikedByUser: post.likes.some((like) => like.userId === user.id),
-        }}
-      />
+      <div className="flex justify-between gap-5">
+        <LikeButton
+          postId={post.id}
+          initialState={{
+            likes: post._count.likes,
+            isLikedByUser: post.likes.some((like) => like.userId === user.id),
+          }}
+        />
+        <BookMarkButton
+          postId={post.id}
+          initialState={{
+            isBookmarkedByUser: post.bookmarks.some(
+              (bookmark) => bookmark.userId === user.id,
+            ),
+          }}
+        />
+      </div>
     </article>
   );
 };

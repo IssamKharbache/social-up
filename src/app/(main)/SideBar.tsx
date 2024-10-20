@@ -51,7 +51,7 @@ const SideBar = ({ className }: MenuBarProps) => {
         title="Messages"
         asChild
       >
-        <Link href="/messages">
+        <Link href="/bookmarks">
           <Bookmark />
           <span className="hidden md:block">Saved</span>
         </Link>

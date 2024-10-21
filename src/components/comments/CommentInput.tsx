@@ -23,7 +23,7 @@ const CommentInput = ({ post }: CommentInputProps) => {
     );
   };
   return (
-    <form className="flex w-full items-center gap-2" onSubmit={onSubmit}>
+    <form className="flex w-full items-center gap-2 px-4" onSubmit={onSubmit}>
       <Input
         placeholder="Comment..."
         value={input}

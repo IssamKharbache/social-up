@@ -13,7 +13,7 @@ import UserToolTip from "./UserToolTip";
 
 const TrendsSideBar = () => {
   return (
-    <div className="sticky top-[5.25rem] hidden h-fit w-72 flex-none space-y-5 md:block lg:w-80">
+    <div className="sticky top-[5.25rem] hidden h-fit w-72 flex-none space-y-5 md:block md:w-36 lg:w-80">
       <Suspense
         fallback={
           <>
@@ -52,7 +52,7 @@ const WhoToFollow = async () => {
   });
   return (
     <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm">
-      <div className="text-xl font-bold">You might like</div>
+      <div className="text-center text-xl font-bold">You might like</div>
       {userToFollow.map((user) => (
         <div className="flex items-center justify-between" key={user.id}>
           <UserToolTip user={user}>
@@ -116,7 +116,7 @@ const TrendingTopics = async () => {
 
   return (
     <div className="space-y-5 rounded-2xl bg-card p-5 shadow-sm">
-      <div className="text-xl font-bold">Trends for you</div>
+      <div className="text-center text-xl font-bold">Trends for you</div>
       {trendingTopics.map(({ hashtag, count }, index) => {
         const title = hashtag.split("#")[1];
         return (

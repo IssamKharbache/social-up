@@ -59,7 +59,7 @@ const LikeButton = ({ postId, initialState }: LikeButtonProps) => {
     <Button
       variant="ghost"
       onClick={() => mutate()}
-      className="flex items-center gap-2"
+      className="flex items-center gap-2 rounded-full"
     >
       <HeartIcon
         className={cn(

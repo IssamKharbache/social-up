@@ -11,12 +11,17 @@ import { Media } from "@prisma/client";
 import Image from "next/image";
 import LikeButton from "./LikeButton";
 import BookMarkButton from "../BookMarkButton";
+import { useState } from "react";
+import { MessageSquareMoreIcon } from "lucide-react";
+import { Button } from "../ui/button";
+import Comments from "../comments/Comments";
 
 interface PostProps {
   post: PostData;
 }
 const Post = ({ post }: PostProps) => {
   const { user } = useSession();
+  const [showComments, setShowComments] = useState(false);
   return (
     <article className="group/post space-y-3 rounded-2xl bg-card p-5 shadow-sm">
       <div className="flex justify-between gap-3">
@@ -67,13 +72,19 @@ const Post = ({ post }: PostProps) => {
       )}
       <hr className="text-muted-foreground" />
       <div className="flex justify-between gap-5">
-        <LikeButton
-          postId={post.id}
-          initialState={{
-            likes: post._count.likes,
-            isLikedByUser: post.likes.some((like) => like.userId === user.id),
-          }}
-        />
+        <div className="flex items-center gap-5">
+          <LikeButton
+            postId={post.id}
+            initialState={{
+              likes: post._count.likes,
+              isLikedByUser: post.likes.some((like) => like.userId === user.id),
+            }}
+          />
+          <CommentsButton
+            onClick={() => setShowComments(!showComments)}
+            post={post}
+          />
+        </div>
         <BookMarkButton
           postId={post.id}
           initialState={{
@@ -83,6 +94,7 @@ const Post = ({ post }: PostProps) => {
           }}
         />
       </div>
+      {showComments && <Comments post={post} />}
     </article>
   );
 };
@@ -137,4 +149,25 @@ const MediaPreview = ({ media }: MediaPreviewProps) => {
     );
   }
   return <div className="text-destructive">Unsuppored media type file</div>;
+};
+
+interface CommentsButtonProps {
+  post: PostData;
+  onClick: () => void;
+}
+
+const CommentsButton = ({ post, onClick }: CommentsButtonProps) => {
+  return (
+    <Button
+      variant="ghost"
+      onClick={onClick}
+      className="flex items-center justify-center gap-2"
+    >
+      <MessageSquareMoreIcon className="size-5" />
+      <span className="flex gap-1 text-sm font-medium tabular-nums">
+        {post._count.comments}
+        <span className="hidden sm:inline">Comments</span>
+      </span>
+    </Button>
+  );
 };

@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/main/PasswordInput";
 import LoadingButton from "@/components/main/LoadingButton";
+import GoogleSignInButton from "./GoogleSignInButton";
 
 const LoginForm = () => {
   const [error, setError] = useState<string>();
@@ -38,7 +39,7 @@ const LoginForm = () => {
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <h1 className="rounded p-1 text-center text-2xl font-bold text-primary">
           Login
         </h1>
@@ -76,6 +77,12 @@ const LoginForm = () => {
         <LoadingButton loading={isPending} type="submit" className="w-full">
           Login
         </LoadingButton>
+        <div className="flex items-center gap-3">
+          <div className="h-px flex-1 bg-muted" />
+          <span>OR</span>
+          <div className="h-px flex-1 bg-muted" />
+        </div>
+        <GoogleSignInButton />
       </form>
     </Form>
   );

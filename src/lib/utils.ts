@@ -25,3 +25,10 @@ export const formatNumber = (n: number) => {
     maximumFractionDigits: 1,
   }).format(n);
 };
+
+export const slugify = (text: string) => {
+  return text
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+};

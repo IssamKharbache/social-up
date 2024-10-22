@@ -17,7 +17,10 @@ const Comment = ({ comment }: CommentProps) => {
       <span className="hidden sm:inline">
         <UserToolTip user={comment.user}>
           <Link href={`/users/${comment.user.username}`}>
-            <UserAvatar avatarUrl={comment.user.avatarUrl} size={40} />
+            <UserAvatar
+              avatarUrl={comment.user.avatarUrl}
+              size={comment.user.avatarUrl ? 40 : 25}
+            />
           </Link>
         </UserToolTip>
       </span>
@@ -25,13 +28,13 @@ const Comment = ({ comment }: CommentProps) => {
         <div className="flex items-center gap-1 text-sm">
           <UserToolTip user={comment.user}>
             <Link
-              className="font-lg hover:underline"
+              className="font-semibold hover:underline"
               href={`/users/${comment.user.username}`}
             >
               {comment.user.displayName}
             </Link>
           </UserToolTip>
-          <span className="text-xs text-muted-foreground">
+          <span className="text-[11px] text-muted-foreground">
             {formatRelativeDate(comment.createdAt)}
           </span>
         </div>

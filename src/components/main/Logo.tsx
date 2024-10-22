@@ -8,8 +8,8 @@ interface Logo {
   className?: string;
 }
 const Logo = ({ className }: Logo) => {
-  const { theme } = useTheme();
-  if (theme === "light") {
+  const { resolvedTheme } = useTheme();
+  if (resolvedTheme === "light") {
     return (
       <div className="">
         <Image

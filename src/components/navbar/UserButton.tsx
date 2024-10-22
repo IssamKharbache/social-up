@@ -42,7 +42,10 @@ const UserButton = ({ className }: UserButtonProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className={cn("flex-none rounded-full", className)}>
-          <UserAvatar avatarUrl={user.avatarUrl} size={20} />
+          <UserAvatar
+            avatarUrl={user.avatarUrl}
+            size={user.avatarUrl ? 20 : 14}
+          />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-4">

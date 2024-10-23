@@ -1,14 +1,10 @@
 "use client";
+import { UserData } from "@/lib/types";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-interface User {
-  id: string;
-  username: string;
-}
-
 interface UserContextType {
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  user: UserData | null;
+  setUser: React.Dispatch<React.SetStateAction<UserData | null>>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -16,7 +12,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserData | null>(null);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

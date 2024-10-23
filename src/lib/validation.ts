@@ -6,10 +6,14 @@ const requiredString = (message?: string) => z.string().trim().min(1, message);
 //sign up schema
 export const signUpSchema = z.object({
   email: requiredString("Email is required").email("Invalid email address"),
-  username: requiredString("Username is required").regex(
-    /^[a-zA-Z0-9_-]+$/,
-    "Only letters, numbers , undercore and dash are allowed",
-  ),
+  username: requiredString("Username is required")
+    .regex(
+      /^[a-zA-Z0-9_-]+$/,
+      "Only letters, numbers , undercore and dash are allowed",
+    )
+    .regex(/^[a-z0-9]+$/, {
+      message: "Username must be lowercase letters and numbers only",
+    }),
   password: requiredString("Password is required").min(
     8,
     "Password must be at least 8 characters",
@@ -40,7 +44,12 @@ export const updateUserProfileSchema = z.object({
   bio: z.string().max(1000, "Bio is too long"),
   username:
     requiredString("Username is required") &&
-    z.string().regex(/^\S*$/, { message: "Username cannot contain spaces" }),
+    z
+      .string()
+      .regex(/^\S*$/, { message: "Username cannot contain spaces" })
+      .regex(/^[a-z0-9]+$/, {
+        message: "Username must be lowercase letters and numbers only",
+      }),
 });
 
 export type UpdateUserProfileValues = z.infer<typeof updateUserProfileSchema>;

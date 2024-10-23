@@ -62,8 +62,8 @@ export const signUp = async (
       });
       await streamServerClient.upsertUser({
         id: userId,
-        username,
-        name: username,
+        username: lowerUsername,
+        name: lowerUsername,
       });
     });
 

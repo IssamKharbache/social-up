@@ -32,7 +32,7 @@ const UserButton = ({ className }: UserButtonProps) => {
       <DropdownMenuTrigger asChild>
         <button className={cn("flex-none rounded-full", className)}>
           <UserAvatar
-            avatarUrl={user.avatarUrl}
+            avatarUrl={userContext?.avatarUrl || user.avatarUrl}
             size={user.avatarUrl ? 20 : 14}
           />
         </button>

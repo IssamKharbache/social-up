@@ -13,7 +13,7 @@ import UserToolTip from "./UserToolTip";
 
 const TrendsSideBar = () => {
   return (
-    <div className="sticky top-[5.25rem] hidden h-fit w-72 flex-none space-y-5 md:block md:w-64 lg:w-80">
+    <div className="sticky top-[5.25rem] hidden h-fit w-72 flex-none space-y-5 lg:block lg:w-80">
       <Suspense
         fallback={
           <>

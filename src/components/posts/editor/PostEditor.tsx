@@ -15,6 +15,7 @@ import { ImagePlusIcon, Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useDropzone } from "@uploadthing/react";
+import { useUser } from "@/app/context/UserProvider";
 
 const PostEditor = () => {
   const { user } = useSession();
@@ -71,10 +72,14 @@ const PostEditor = () => {
       .map((item) => item.getAsFile()) as File[];
     startUpload(files);
   };
+  const { user: userContext } = useUser();
   return (
     <div className="flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm">
       <div className="flex gap-5">
-        <UserAvatar avatarUrl={user?.avatarUrl} className="hidden sm:inline" />
+        <UserAvatar
+          avatarUrl={userContext?.avatarUrl || user?.avatarUrl}
+          className="hidden sm:inline"
+        />
         <div {...rootProps} className="w-full">
           <EditorContent
             editor={editor}

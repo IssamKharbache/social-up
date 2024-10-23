@@ -18,7 +18,7 @@ const NotificationButton = ({ initialState }: NotificationsButtonProps) => {
         .get("/api/notifications/unread-count")
         .json<NotificationCountInfo>(),
     initialData: initialState,
-    refetchInterval: 60 * 1000,
+    refetchInterval: 10 * 1000,
   });
   return (
     <Button

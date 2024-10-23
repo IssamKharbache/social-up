@@ -36,7 +36,10 @@ export const useUpdateProfileMutation = () => {
     onSuccess: async ([updatedUser, uploadResult]) => {
       const newAvatarUrl = uploadResult?.[0].serverData.avatarUrl;
       // Update user context
-      setUser({ ...updatedUser });
+      setUser({
+        ...updatedUser,
+        avatarUrl: newAvatarUrl || updatedUser.avatarUrl,
+      });
       const queryFilter: QueryFilters = {
         queryKey: ["post-feed"],
       };
@@ -68,6 +71,7 @@ export const useUpdateProfileMutation = () => {
       );
       // Redirect to the new user profile route
       router.push(`/users/${updatedUser.username}`);
+      router.refresh();
 
       toast({
         title: "Profile updated",

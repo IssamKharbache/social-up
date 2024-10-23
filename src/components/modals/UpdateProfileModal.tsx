@@ -148,9 +148,18 @@ const UpdateProfileModal = ({
               )}
             />
             <DialogFooter>
+              {/* <div className="flex w-full justify-between"> */}
+              {/* <LoadingButton
+                  variant="destructive"
+                  type="button"
+                  loading={mutation.isPending}
+                >
+                  Delete Account
+                </LoadingButton> */}
               <LoadingButton type="submit" loading={mutation.isPending}>
                 Save
               </LoadingButton>
+              {/* </div> */}
             </DialogFooter>
           </form>
         </Form>

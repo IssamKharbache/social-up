@@ -41,3 +41,11 @@ export const updateUserProfile = async (values: UpdateUserProfileValues) => {
   });
   return updatedUser;
 };
+
+export const deleteUser = async (id: string) => {
+  const { user } = await validateRequest();
+  if (!user) throw new Error("Unauthorized");
+  await prisma.user.delete({
+    where: { id: id },
+  });
+};

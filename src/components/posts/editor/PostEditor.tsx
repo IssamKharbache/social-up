@@ -20,6 +20,7 @@ import { useUser } from "@/app/context/UserProvider";
 const PostEditor = () => {
   const { user } = useSession();
   const mutation = useSubmitPostMutation();
+  const { setOpenModal } = useUser();
   const {
     attachments,
     removeAttachment,
@@ -62,6 +63,7 @@ const PostEditor = () => {
         onSuccess: () => {
           editor?.commands.clearContent();
           resetMediaUpload();
+          setOpenModal(false);
         },
       },
     );

@@ -4,13 +4,11 @@ import NotificationButton from "@/components/notification/NotificationButton";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import streamServerClient from "@/lib/stream";
-import { Bookmark, Home } from "lucide-react";
+import { Bookmark, Home, PlusIcon } from "lucide-react";
 import Link from "next/link";
-import MessagesButton from "./messages/MessagesButton";
 import MessagesButtonComponent from "./messages/MessagesButton";
-import UserAvatar from "@/components/UserAvatar";
-import UserButton from "@/components/navbar/UserButton";
 import UserSideBarButton from "@/components/main/UserSideBarButton";
+import CreatePostButton from "@/components/posts/CreatePostButton";
 
 interface MenuBarProps {
   className?: string;
@@ -61,6 +59,8 @@ const SideBar = async ({ className }: MenuBarProps) => {
           <span className="hidden md:block">Saved</span>
         </Link>
       </Button>
+      {/* create post button */}
+      <CreatePostButton />
       {/*  */}
       <UserSideBarButton />
     </div>

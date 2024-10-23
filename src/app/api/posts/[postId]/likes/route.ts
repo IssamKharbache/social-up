@@ -88,6 +88,7 @@ export const POST = async (
           ]
         : []),
     ]);
+
     return new Response();
   } catch (error) {
     console.error(error);

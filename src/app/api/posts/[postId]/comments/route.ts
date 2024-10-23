@@ -1,6 +1,6 @@
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { CommentPage, getCommentDataInclude } from "@/lib/types";
+import { CommentsPage, getCommentDataInclude } from "@/lib/types";
 import { NextRequest } from "next/server";
 
 export const GET = async (
@@ -24,7 +24,7 @@ export const GET = async (
       cursor: cursor ? { id: cursor } : undefined,
     });
     const previousCursor = comments.length > pageSize ? comments[0].id : null;
-    const data: CommentPage = {
+    const data: CommentsPage = {
       comments: comments.length > pageSize ? comments.slice(1) : comments,
       previousCursor,
     };

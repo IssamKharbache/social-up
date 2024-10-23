@@ -12,14 +12,17 @@ const NavBar = () => {
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-5 px-5 py-3">
         {/*  */}
         <Link href="/">
-          <Logo className="w-32" />
+          <Logo className="w-24 md:w-36" />
         </Link>
         {/* search bar */}
         <SearchBar />
 
         <div className="flex items-center gap-4">
           {/* theme  */}
-          <ThemeChanger />
+          <div className="hidden md:block">
+            <ThemeChanger />
+          </div>
+
           {/* user button */}
           <UserButton />
         </div>

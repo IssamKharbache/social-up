@@ -59,10 +59,12 @@ const SideBar = async ({ className }: MenuBarProps) => {
           <span className="hidden md:block">Saved</span>
         </Link>
       </Button>
-      {/* create post button */}
-      <CreatePostButton />
-      {/*  */}
-      <UserSideBarButton />
+      <div className="hidden md:block">
+        {/* create post button */}
+        <CreatePostButton />
+        {/*  */}
+        <UserSideBarButton />
+      </div>
     </div>
   );
 };

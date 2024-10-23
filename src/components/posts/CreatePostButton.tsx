@@ -9,7 +9,7 @@ const CreatePostButton = () => {
   const { openModal, setOpenModal } = useUser();
   return (
     <>
-      <div className="hidden md:block">
+      <div className="mb-4">
         {" "}
         <Button
           onClick={() => setOpenModal(true)}

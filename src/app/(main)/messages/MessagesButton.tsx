@@ -21,7 +21,7 @@ const MessagesButtonComponent = ({ initialState }: MessagesButtonProps) => {
   return (
     <Button
       variant="ghost"
-      className="flex items-center justify-start gap-3 p-8"
+      className="flex items-center justify-start gap-3 rounded-full p-8"
       title="Notifications"
       asChild
     >

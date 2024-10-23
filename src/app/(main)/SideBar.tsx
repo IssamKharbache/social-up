@@ -8,6 +8,9 @@ import { Bookmark, Home } from "lucide-react";
 import Link from "next/link";
 import MessagesButton from "./messages/MessagesButton";
 import MessagesButtonComponent from "./messages/MessagesButton";
+import UserAvatar from "@/components/UserAvatar";
+import UserButton from "@/components/navbar/UserButton";
+import UserSideBarButton from "@/components/main/UserSideBarButton";
 
 interface MenuBarProps {
   className?: string;
@@ -29,7 +32,7 @@ const SideBar = async ({ className }: MenuBarProps) => {
       {/* Home */}
       <Button
         variant="ghost"
-        className="flex items-center justify-start gap-3 p-8"
+        className="flex items-center justify-start gap-3 rounded-full p-8"
         title="Home"
         asChild
       >
@@ -49,7 +52,7 @@ const SideBar = async ({ className }: MenuBarProps) => {
       {/* bookmarks */}
       <Button
         variant="ghost"
-        className="flex items-center justify-start gap-3 p-8"
+        className="flex items-center justify-start gap-3 rounded-full p-8"
         title="Messages"
         asChild
       >
@@ -58,6 +61,8 @@ const SideBar = async ({ className }: MenuBarProps) => {
           <span className="hidden md:block">Saved</span>
         </Link>
       </Button>
+      {/*  */}
+      <UserSideBarButton />
     </div>
   );
 };

@@ -23,12 +23,13 @@ export const signUp = async (
     });
 
     const userId = generateIdFromEntropySize(10);
+    const lowerUsername = username.toLowerCase();
 
     //checking if user already exists
     const existingUsername = await prisma.user.findFirst({
       where: {
         username: {
-          equals: username,
+          equals: lowerUsername,
           mode: "insensitive",
         },
       },
@@ -53,8 +54,8 @@ export const signUp = async (
       await tx.user.create({
         data: {
           id: userId,
-          username,
-          displayName: username,
+          username: lowerUsername,
+          displayName: lowerUsername,
           email,
           hashedPassword: passwordHash,
         },

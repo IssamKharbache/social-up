@@ -6,28 +6,17 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
 import UserAvatar from "../UserAvatar";
 import Link from "next/link";
-import {
-  Check,
-  LogOutIcon,
-  Monitor,
-  MoonIcon,
-  Sun,
-  User2Icon,
-} from "lucide-react";
+import { LogOutIcon, User2Icon } from "lucide-react";
 import { logout } from "@/app/(auth)/actions";
 import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
 import { useQueryClient } from "@tanstack/react-query";
+import { useUser } from "@/app/context/UserProvider";
 
 interface UserButtonProps {
   className?: string;
@@ -35,9 +24,9 @@ interface UserButtonProps {
 
 const UserButton = ({ className }: UserButtonProps) => {
   const { user } = useSession();
-  const { theme, setTheme } = useTheme();
-
   const queryClient = useQueryClient();
+  const { user: userContext } = useUser();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -50,10 +39,17 @@ const UserButton = ({ className }: UserButtonProps) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-4">
         {/* logged in user */}
-        <DropdownMenuLabel>@{user.username}</DropdownMenuLabel>
+        <DropdownMenuLabel>
+          @
+          {userContext?.username === undefined
+            ? user.username
+            : userContext.username}
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
         {/* profile */}
-        <Link href={`/users/${user.username}`}>
+        <Link
+          href={`/users/${userContext?.username === undefined ? user.username : userContext.username}`}
+        >
           <DropdownMenuItem>
             <User2Icon className="mr-2 size-4" />
             Profile

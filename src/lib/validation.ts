@@ -38,6 +38,9 @@ export const createPostSchema = z.object({
 export const updateUserProfileSchema = z.object({
   displayName: requiredString("Display name is required"),
   bio: z.string().max(1000, "Bio is too long"),
+  username:
+    requiredString("Username is required") &&
+    z.string().regex(/^\S*$/, { message: "Username cannot contain spaces" }),
 });
 
 export type UpdateUserProfileValues = z.infer<typeof updateUserProfileSchema>;

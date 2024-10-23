@@ -16,7 +16,7 @@ const SearchBar = () => {
     //check if query is undefined
     if (!query) return;
     //push to the search page
-    router.push(`/search?q=${encodeURIComponent(query)}`);
+    router.push(`/search?query=${encodeURIComponent(query)}`);
   };
   return (
     <form onSubmit={handleSubmit} method="GET" action="/search">

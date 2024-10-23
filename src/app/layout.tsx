@@ -8,6 +8,7 @@ import NextTopLoader from "nextjs-toploader";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { fileRouter } from "./api/uploadthing/core";
+import { UserProvider } from "./context/UserProvider";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -36,18 +37,20 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistSans.className} ${geistMono.variable}`}
       >
         <NextSSRPlugin routerConfig={extractRouterConfig(fileRouter)} />
-        <ReactQueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NextTopLoader color="#b36ba9" showSpinner={false} />
-            {children}
-          </ThemeProvider>
-          <Toaster />
-        </ReactQueryProvider>
+        <UserProvider>
+          <ReactQueryProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <NextTopLoader color="#b36ba9" showSpinner={false} />
+              {children}
+            </ThemeProvider>
+            <Toaster />
+          </ReactQueryProvider>
+        </UserProvider>
       </body>
     </html>
   );

@@ -31,7 +31,6 @@ import defaultAvatar from "@/assets/avatar.png";
 import { CameraIcon } from "lucide-react";
 import CropImageModal from "../CropImageModal";
 import Resizer from "react-image-file-resizer";
-
 interface UpdateProfileModalProps {
   user: UserData;
   open: boolean;
@@ -49,10 +48,12 @@ const UpdateProfileModal = ({
     defaultValues: {
       displayName: user.displayName,
       bio: user.bio || "",
+      username: user.username,
     },
   });
   // mutation hook
   const mutation = useUpdateProfileMutation();
+
   //on submit function
 
   const onSubmit = async (values: UpdateUserProfileValues) => {
@@ -102,6 +103,28 @@ const UpdateProfileModal = ({
                   <FormLabel>Display Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Type your display name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  {mutation?.error?.message === "duplicateusername" && (
+                    <p className="text-xs text-destructive">
+                      Username already exists, try a different one
+                    </p>
+                  )}
+                  <FormControl>
+                    <Input
+                      placeholder="Type your username"
+                      {...field}
+                      className={`${mutation?.error?.message === "duplicateusername" && "border-red-500"}`}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

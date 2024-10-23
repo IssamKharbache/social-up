@@ -10,12 +10,14 @@ import {
 import { updateUserProfile } from "./action";
 import { PostsPage } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/app/context/UserProvider";
 
 export const useUpdateProfileMutation = () => {
   const { toast } = useToast();
   const router = useRouter();
 
   const queryCLient = useQueryClient();
+  const { setUser } = useUser();
 
   const { startUpload: startAvatarUpload } = useUploadThing("avatar");
   const mutation = useMutation({
@@ -33,6 +35,8 @@ export const useUpdateProfileMutation = () => {
     },
     onSuccess: async ([updatedUser, uploadResult]) => {
       const newAvatarUrl = uploadResult?.[0].serverData.avatarUrl;
+      // Update user context
+      setUser({ ...updatedUser });
       const queryFilter: QueryFilters = {
         queryKey: ["post-feed"],
       };
@@ -52,6 +56,7 @@ export const useUpdateProfileMutation = () => {
                     user: {
                       ...updatedUser,
                       avatarUrl: newAvatarUrl || updatedUser.avatarUrl,
+                      username: updatedUser.username,
                     },
                   };
                 }
@@ -61,7 +66,9 @@ export const useUpdateProfileMutation = () => {
           };
         },
       );
-      router.refresh();
+      // Redirect to the new user profile route
+      router.push(`/users/${updatedUser.username}`);
+
       toast({
         title: "Profile updated",
         description: "Your profile has been updated successfully",

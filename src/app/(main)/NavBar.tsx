@@ -19,9 +19,8 @@ const NavBar = () => {
 
         <div className="flex items-center gap-4">
           {/* theme  */}
-          <div className="hidden md:block">
-            <ThemeChanger />
-          </div>
+
+          <ThemeChanger />
 
           {/* user button */}
           <UserButton />

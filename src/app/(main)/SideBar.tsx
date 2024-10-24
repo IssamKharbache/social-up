@@ -30,12 +30,12 @@ const SideBar = async ({ className }: MenuBarProps) => {
       {/* Home */}
       <Button
         variant="ghost"
-        className="flex items-center justify-start gap-3 rounded-full p-8"
+        className="flex items-center justify-start gap-3 rounded-full md:p-8"
         title="Home"
         asChild
       >
         <Link href="/">
-          <Home />
+          <Home className="size-5 md:size-7" />
           <span className="hidden md:block">Home</span>
         </Link>
       </Button>
@@ -50,12 +50,12 @@ const SideBar = async ({ className }: MenuBarProps) => {
       {/* bookmarks */}
       <Button
         variant="ghost"
-        className="flex items-center justify-start gap-3 rounded-full p-8"
+        className="flex items-center justify-start gap-3 rounded-full md:p-8"
         title="Messages"
         asChild
       >
         <Link href="/bookmarks">
-          <Bookmark />
+          <Bookmark className="size-5 md:size-7" />
           <span className="hidden md:block">Saved</span>
         </Link>
       </Button>

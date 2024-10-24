@@ -1,8 +1,8 @@
 import Logo from "@/components/main/Logo";
 import ThemeChanger from "@/components/main/ThemeChanger";
+import MobileSearch from "@/components/MobileSearch";
 import UserButton from "@/components/navbar/UserButton";
 import SearchBar from "@/components/SearchBar";
-
 import Link from "next/link";
 import React from "react";
 
@@ -15,13 +15,16 @@ const NavBar = () => {
           <Logo className="w-24 md:w-36" />
         </Link>
         {/* search bar */}
-        <SearchBar />
+        <div className="hidden md:block">
+          <SearchBar />
+        </div>
+        <div className="md:hidden">
+          <MobileSearch />
+        </div>
 
         <div className="flex items-center gap-4">
           {/* theme  */}
-
           <ThemeChanger />
-
           {/* user button */}
           <UserButton />
         </div>

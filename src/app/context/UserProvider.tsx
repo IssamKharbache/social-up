@@ -7,6 +7,8 @@ interface UserContextType {
   setUser: React.Dispatch<React.SetStateAction<UserData | null>>;
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  openSearchModal: boolean;
+  setOpenSearchModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -16,9 +18,19 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [user, setUser] = useState<UserData | null>(null);
   const [openModal, setOpenModal] = useState(false);
+  const [openSearchModal, setOpenSearchModal] = useState(false);
 
   return (
-    <UserContext.Provider value={{ user, setUser, openModal, setOpenModal }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUser,
+        openModal,
+        setOpenModal,
+        openSearchModal,
+        setOpenSearchModal,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

@@ -37,7 +37,7 @@ const UserButton = ({ className }: UserButtonProps) => {
           />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-4">
+      <DropdownMenuContent className="mr-4 p-4 md:mr-0">
         {/* logged in user */}
         <DropdownMenuLabel>
           @

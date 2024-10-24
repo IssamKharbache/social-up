@@ -21,13 +21,13 @@ const MessagesButtonComponent = ({ initialState }: MessagesButtonProps) => {
   return (
     <Button
       variant="ghost"
-      className="flex items-center justify-start gap-3 rounded-full md:p-8"
+      className="flex items-center justify-start gap-3 rounded-full p-4 md:p-8"
       title="Notifications"
       asChild
     >
       <Link href="/messages">
         <div className="relative">
-          <MessageCircleMore className="size-5 md:size-7" />
+          <MessageCircleMore className="size-6 md:size-7" />
           {!!data.unreadCount && (
             <span className="absolute -right-1 -top-1 h-4 w-4 rounded-full bg-primary text-center text-xs font-medium tabular-nums text-primary-foreground">
               {data.unreadCount}

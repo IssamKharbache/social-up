@@ -4,9 +4,13 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { Input } from "./ui/input";
 import { SearchIcon } from "lucide-react";
+import { Button } from "./ui/button";
+import { useUser } from "@/app/context/UserProvider";
 
 const SearchBar = () => {
   const router = useRouter();
+  const { setOpenSearchModal } = useUser();
+
   //handle submit function
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
